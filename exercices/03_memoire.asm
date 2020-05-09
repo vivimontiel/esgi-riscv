@@ -7,12 +7,17 @@
 # Questions:
 # 
 # - Quelle est l'addresse de `num0`, `num1`, `resultat`?
+#	num0: 0x10010000	num1: 0x10010004	resultat: 0x10010008
 # - La dernière addresse du code votre programme
+#	ecall : 0x00000073
 # - Comment est coté en langage machine (hexadecimal) l'instruction: `lw  t1, 0(t0)`
+#	0x0002a303
 # - La mémoire est-elle dans le processeur?
+#	Oui, il y a des petites unités de mémoire disposées dans le processeur qui sont les registres (merci Readme du cours :D )
 # - Quand on accede à la mémoire par mots de 32 bits est accessible de combien en combien?
+#	De 4 en 4
 # - Quelle est la valeur dans la mémoire de la valeur à l'addresse `num0`
-
+#    	hexa: 0x0000007c	decimal: 124
 # Imagions un programme en C comme celui-ci: (dispo dans 03_memoire.c)
 #
 # ```C
@@ -68,3 +73,17 @@ sw t5, 0(t4)
 # A faire par vous totalement:
 # Afficher nos deux nombres dans la console
 # indice: syscall printInt
+
+li a7, 1  # numéro syscall	Prints: num0_g: .word 124
+add a0, t1, zero   # load desired value into argument register a0, using pseudo-op
+ecall 
+ 
+li a7, 1  # numéro syscall	Prints: num1_g: .word 256
+add a0, t3, zero   # load desired value into argument register a0, using pseudo-op  
+ecall 
+
+li a7, 1  # numéro syscall	Prints: resultat_g: 380
+add a0, t5, zero   # load desired value into argument register a0, using pseudo-op  
+ecall 
+
+

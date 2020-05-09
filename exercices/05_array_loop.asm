@@ -7,7 +7,13 @@
 # Questions:
 # 
 # - Réussir à faire une boucle en assembleur.
-# - Combiens d'instructions sont telles faites au total avec votre boucle?
+# - Combien d'instructions sont telles faites au total avec votre boucle?
+#   Reponse: 53 instructions au total :
+#	Pre boucle: 9
+#	Boucle: 5 x 8 + 1 = 41
+#	Pre boucle: 3
+#	TOTAL : 53 instructions
+
 # Bonus:
 # - Faire la boucle avec un compteur dans un exo 05_1_array_loop
 # - Comment pourrions nous améliorer les performances de la boucle?
@@ -56,33 +62,35 @@ for:
   # si addresse de fin = addresse courante alors stop sinon continue
   # Instruction: beq
   ##
-
+  beq t3, t2, end_for
   ##
   # On charge depuis la mémorie la valeur à l'addresse courante dans notre tableau
   # et additionne a notre somme
   # Instruction: Indice chargement mémoire mot 32bits
   ##
-
+  lw t4, 0(t3)
   ##
   # Addition entre la valeur de la case du tableau et notre somme.
   # Instruction: Indice Addition entre deux registres sans immédiat
   ##
-  
+  add a0, a0, t4
   ##
   # Increment de l'addresse du tableau
   # Instruction addi, attention rappel: 
   # entiers sur 32bits donc on index de 4 en 4.
   ##
-
   addi t3, t3, 4 # On addresse de 4 en 4 car on est sur des mots de 32bits.
   ###
   # On saute au début de la boucle pour tester si on continue.
   ###
   j for # On continue!
   # Un label pour la sortie de boucle
+
 end_for:
 
-
+li a7, 1  # numéro syscall	resultat_g: 380
+add a0, a0, zero   # load desired value into argument register a0, using pseudo-op  
+ecall 
 # Affichez la somme ici!
 # A faire par vous totalement:
 # Afficher nos deux nombres dans la console

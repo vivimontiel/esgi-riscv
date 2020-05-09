@@ -1,0 +1,15 @@
+.text
+main:
+
+#Stack avant
+# +----------+ < sp
+# +----------+ 
+ 
+addi sp, sp, -8
+
+# Stack après
+# +----------+ stack base address
+# |          | 
+# +----------+ 
+# |          | 
+# +----------+ <- sp
